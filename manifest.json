@@ -1,0 +1,31 @@
+{
+    "manifest_version": 3,
+    "name": "My Lichess",
+    "description": "Lichess extension to change chess board styles",
+    "version": "1.0",
+    "permissions": ["activeTab","scripting"],
+    "icons":{
+      "16":"images/logo.png",
+      "48":"images/logo.png",
+      "128":"images/logo.png"
+    },
+    "content_scripts": [
+      {
+        "js": ["script.js"],
+        "matches": [
+          "https://*.lichess.org/*"
+        ]
+      }
+    ],
+    "web_accessible_resources": [
+      {
+          "resources": [
+              "script.js",
+              "images/*"
+          ],
+          "matches": [
+              "https://*.lichess.org/*"
+          ]
+      }
+  ]
+}
