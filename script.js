@@ -1,5 +1,7 @@
-let chessBoard = document.querySelector("cg-board");
-chessBoard.style.backgroundImage = `url("chrome-extension://@${chrome.runtime.id}/images/board.png")`;
+let chessBoards = document.querySelectorAll("cg-board");
+for (let boards of chessBoards) {
+  boards.style.backgroundImage = `url("chrome-extension://@${chrome.runtime.id}/images/board.png")`;
+}
 let chessPieces = document.querySelectorAll("piece");
 for (let piece of chessPieces) {
   piece.style.top = "1.1%";
