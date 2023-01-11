@@ -2,14 +2,15 @@ let chessBoards = document.querySelectorAll("cg-board");
 for (let boards of chessBoards) {
   boards.style.backgroundImage = `url("chrome-extension://@${chrome.runtime.id}/images/board.png")`;
 }
-let chessPieces = document.querySelectorAll("piece");
-for (let piece of chessPieces) {
-  piece.style.top = "1.1%";
-  piece.style.left = "1.1%";
-  piece.style.width = "10.5%";
-  piece.style.height = "10.5%";
-}
+
 const changePieces = () => {
+  let chessPieces = document.querySelectorAll("piece");
+  for (let piece of chessPieces) {
+    piece.style.top = "1.1%";
+    piece.style.left = "1.1%";
+    piece.style.width = "10.5%";
+    piece.style.height = "10.5%";
+  }
   const colors = ["black", "white"];
   const pieces = ["king", "queen", "rook", "knight", "bishop", "pawn"];
   for (let color of colors) {
@@ -27,8 +28,23 @@ const changePieces = () => {
     }
   }
 };
+const changeFontSize = () => {
+  let cords = document.querySelectorAll("coords");
+  for (let cord of cords) {
+    cord.style.fontSize = "1.2vw";
+  }
+};
+
 changePieces();
+changeFontSize();
+
+var lenOfChildren = 0;
 let mutation = new MutationObserver(() => {
+  let newLength = chessBoards[0].childElementCount;
+  if (lenOfChildren !== newLength) {
+    lenOfChildren = newLength;
+    changePieces();
+  }
   let selectedSquare = document.querySelector("square[class='selected']");
   if (!selectedSquare) {
     return null;
@@ -67,19 +83,10 @@ let mutation = new MutationObserver(() => {
     square.style.background = `rgba(194,212,138,0.5)`;
   }
 });
-mutation.observe(chessBoard, {
-  childList: true,
-  attributes: true,
-  subtree: true,
-  characterDataOldValue: true,
-});
-for (let child of chessBoard.children) {
-  mutation.observe(child, {
+for (let board of chessBoards) {
+  mutation.observe(board, {
     childList: true,
     attributes: true,
     subtree: true,
-    attributeOldValue: true,
-    characterData: true,
-    characterDataOldValue: true,
   });
 }

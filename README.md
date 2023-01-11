@@ -11,6 +11,6 @@ Refer [here](https://developer.chrome.com/docs/extensions/mv3/getstarted/develop
 
 ## How it looks
 
-<img src="./screenshot.png" width="90%" height="90%">
+<img src="./images/screenshot.png" width="90%" height="90%">
 
 This is how it currently looks
